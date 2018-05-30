@@ -9,6 +9,17 @@ const schema = buildSchema(`
   type Pokemon {
     id: String
     name: String!
+    weight: Weights
+    weaknesses: [String]
+    evolutions: [Evolution]
+  }
+  type Weights{
+    minimum: String,
+    maximum: String
+  }
+  type Evolution{
+    id: Int,
+    name: String
   }
   type Query {
     Pokemons: [Pokemon]
