@@ -3,7 +3,7 @@ const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
 // The data below is mocked.
 const data = require("./data/pokemon.js");
-
+const pokeballs = require("./data/pokeballs.js");
 // The schema should model the full data object available.
 const schema = buildSchema(`
   type Pokemon {
@@ -21,9 +21,16 @@ const schema = buildSchema(`
     id: Int,
     name: String
   }
+
+  type Pokeballs {
+    id: String
+    name: String
+    catch_rate: String
+  }
   type Query {
     Pokemons: [Pokemon]
     Pokemon(name: String): Pokemon
+    Pokeballs: [Pokeballs]
   }
 `);
 
@@ -34,6 +41,9 @@ const root = {
   },
   Pokemon: (request) => {
     return data.find((pokemon) => pokemon.name === request.name);
+  },
+  Pokeballs: () => {
+    return pokeballs;
   },
 };
 
