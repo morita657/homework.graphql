@@ -15,6 +15,10 @@ const schema = buildSchema(`
     id: String
     name: String
   }
+  input PokemonballInput {
+    id: String
+    name: String
+  }
   type Pokemon {
     id: String
     name: String!
@@ -41,11 +45,15 @@ const schema = buildSchema(`
     Pokemon(name: String): Pokemon
     Pokeballs: [Pokeballs]
     getPokemon(id: String!): Pokemon
+    getPokeballs(id: String!): Pokeballs
   }
   type Mutation {
     createPokemon(input: PokemonInput):Pokemon
     updatePokemon(id: String!, input: PokemonInput):Pokemon
     deletePokemon(id: String!, input: PokemonInput):Pokemon
+    createPokeballs(input: PokeballsInput):Pokeballs
+    updatePokeballs(id: String!, input: PokeballsInput):Pokeballs
+    deletePokeballs(id: String!, input: PokeballsInput):Pokeballs
   }
 `);
 
