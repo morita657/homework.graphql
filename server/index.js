@@ -1,6 +1,11 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
+const path = require("path");
+const bodyParser = require("body-parser");
+const ApolloClient = require("apollo-boost");
+const gql = require("graphql-tag");
+
 // The data below is mocked.
 const data = require("./data/pokemon.js");
 const pokeballs = require("./data/pokeballs.js");
@@ -64,6 +69,8 @@ app.use(
     graphiql: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../client")));
 app.listen(4000);
 
 console.log("Running a GraphQL API server at localhost:4000/graphql");
