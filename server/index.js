@@ -11,6 +11,10 @@ const data = require("./data/pokemon.js");
 const pokeballs = require("./data/pokeballs.js");
 // The schema should model the full data object available.
 const schema = buildSchema(`
+  input PokemonInput {
+    id: String
+    name: String
+  }
   type Pokemon {
     id: String
     name: String!
@@ -36,6 +40,12 @@ const schema = buildSchema(`
     Pokemons: [Pokemon]
     Pokemon(name: String): Pokemon
     Pokeballs: [Pokeballs]
+    getPokemon(id: String!): Pokemon
+  }
+  type Mutation {
+    createPokemon(input: PokemonInput):Pokemon
+    updatePokemon(id: String!, input: PokemonInput):Pokemon
+    deletePokemon(id: String!, input: PokemonInput):Pokemon
   }
 `);
 
