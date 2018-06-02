@@ -5,7 +5,6 @@ import { ApolloProvider } from "react-apollo";
 import Pokemon from "./Pokemon";
 
 const client = new ApolloClient({
-  // uri: "https://vm8mjvrnv3.lp.gql.zone/graphql"
   uri: "http://localhost:4000/graphql",
 });
 

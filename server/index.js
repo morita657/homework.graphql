@@ -2,9 +2,6 @@ const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const { buildSchema } = require("graphql");
 const path = require("path");
-const bodyParser = require("body-parser");
-const ApolloClient = require("apollo-boost");
-const gql = require("graphql-tag");
 var cors = require("cors");
 
 // The data below is mocked.
