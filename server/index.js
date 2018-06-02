@@ -5,6 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const ApolloClient = require("apollo-boost");
 const gql = require("graphql-tag");
+var cors = require("cors");
 
 // The data below is mocked.
 const data = require("./data/pokemon.js");
@@ -44,16 +45,6 @@ const schema = buildSchema(`
     Pokemons: [Pokemon]
     Pokemon(name: String): Pokemon
     Pokeballs: [Pokeballs]
-    getPokemon(id: String!): Pokemon
-    getPokeballs(id: String!): Pokeballs
-  }
-  type Mutation {
-    createPokemon(input: PokemonInput):Pokemon
-    updatePokemon(id: String!, input: PokemonInput):Pokemon
-    deletePokemon(id: String!, input: PokemonInput):Pokemon
-    createPokeballs(input: PokeballsInput):Pokeballs
-    updatePokeballs(id: String!, input: PokeballsInput):Pokeballs
-    deletePokeballs(id: String!, input: PokeballsInput):Pokeballs
   }
 `);
 
@@ -72,7 +63,7 @@ const root = {
 
 // Start your express server!
 const app = express();
-
+app.use(cors());
 /*
   The only endpoint for your server is `/graphql`- if you are fetching a resource, 
   you will need to POST your query to that endpoint. Suggestion: check out Apollo-Fetch
@@ -87,8 +78,7 @@ app.use(
     graphiql: true,
   })
 );
-
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "../")));
 app.listen(4000);
 
 console.log("Running a GraphQL API server at localhost:4000/graphql");
