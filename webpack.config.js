@@ -1,8 +1,12 @@
+// const OpenBrowserPlugin = require("open-browser-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: [`${path.resolve(__dirname, "client")}/index.js`],
+  entry: [
+    "webpack/hot/only-dev-server",
+    `${path.resolve(__dirname, "index.jsx")}`,
+  ],
   module: {
     loaders: [
       {
@@ -11,21 +15,22 @@ module.exports = {
       },
       {
         exclude: /(node_modules)/,
-        include: path.join(__dirname, "src"),
+        include: path.join(__dirname, "/"),
         loader: "babel-loader",
         query: {
-          presets: ["react"],
+          presets: ["react", "stage-2"],
         },
         test: /\.jsx?$/,
       },
     ],
   },
-  devtool: "cheap-module-eval-source-map",
+  devtool: "source-map",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "client"),
-    publicPath: "/client",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/dist",
   },
+  // plugins: [new OpenBrowserPlugin({ url: "http://localhost:8080" })],
   resolve: {
     extensions: [".webpack.js", ".js", ".jsx"],
   },
